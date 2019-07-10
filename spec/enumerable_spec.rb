@@ -122,7 +122,7 @@ RSpec.describe Enumerable do
     end
   end
   describe "#my_inject" do
-     it ' maps through array using the block' do
+     it ' injects all elements of array' do
       arr = [1,5,76,2,3]
       expect( arr.my_inject{ |x,y| x + y } ).to eql(88)
       expect( arr.my_inject{ |x,y| x * y } ).to eql(2280)
@@ -130,7 +130,7 @@ RSpec.describe Enumerable do
     end
   end
   describe "#multiply_els" do
-    it ' maps through array using the block' do
+    it ' returns the product of array elements using inject method' do
      arr = [1,5,76,2,3]
      expect( arr.multiply_els ).to eql(2280)
    end
