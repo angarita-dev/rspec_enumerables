@@ -71,4 +71,54 @@ RSpec.describe Enumerable do
       expect( arr.my_none?{ |x| x.length > 3 }).to eql(false)
     end
   end
+  describe "#my_count" do
+    it ' counts using the proc' do
+      arr = [1,5,76,2,3]
+      proc1 = Proc.new { |element|
+        element+10 >= 15
+      }
+      proc2 = Proc.new { |element|
+        element%2 == 0
+      }
+      proc3 = Proc.new { |element|
+        element%2 != 0
+      }
+      expect( arr.my_count(proc1) ).to eql(2)
+      expect( arr.my_count(proc2) ).to eql(2)
+      expect( arr.my_count(proc3) ).to eql(3)
+    end
+    it ' counts using the block' do
+      arr = [1,5,76,2,3]
+      expect( arr.my_count{ |x| x+10 >= 15} ).to eql(2)
+      expect( arr.my_count{ |x| x%2 == 0} ).to eql(2)
+      expect( arr.my_count{ |x| x%2 != 0} ).to eql(3)
+    end
+    it ' counts with empty block and without proc' do
+      arr = [1,5,76,2,3]
+      expect( arr.my_count{} ).to eql(5)
+    end
+  end
+  describe "#my_map" do
+    it ' maps through array using the proc' do
+      arr = [1,5,76,2,3]
+      proc1 = Proc.new { |element|
+        element+10
+      }
+      proc2 = Proc.new { |element|
+        element/2
+      }
+      proc3 = Proc.new { |element|
+        element+1
+      }
+      expect( arr.my_map(proc1) ).to eql([11,15,86,12,13])
+      expect( arr.my_map(proc2) ).to eql([0,2,38,1,1])
+      expect( arr.my_map(proc3) ).to eql([2,6,77,3,4])
+    end
+    it ' maps through array using the block' do
+      arr = [1,5,76,2,3]
+      expect( arr.my_map{ |x| x+10 } ).to eql([11,15,86,12,13])
+      expect( arr.my_map{ |x| x/2 } ).to eql([0,2,38,1,1])
+      expect( arr.my_map{ |x| x+1 } ).to eql([2,6,77,3,4])
+    end
+  end
 end
