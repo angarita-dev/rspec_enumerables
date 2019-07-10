@@ -121,4 +121,18 @@ RSpec.describe Enumerable do
       expect( arr.my_map{ |x| x+1 } ).to eql([2,6,77,3,4])
     end
   end
+  describe "#my_inject" do
+     it ' maps through array using the block' do
+      arr = [1,5,76,2,3]
+      expect( arr.my_inject{ |x,y| x + y } ).to eql(88)
+      expect( arr.my_inject{ |x,y| x * y } ).to eql(2280)
+      expect( arr.my_inject{ |x,y| x - y } ).to eql(-86)
+    end
+  end
+  describe "#multiply_els" do
+    it ' maps through array using the block' do
+     arr = [1,5,76,2,3]
+     expect( arr.multiply_els ).to eql(2280)
+   end
+ end
 end
